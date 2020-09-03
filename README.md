@@ -116,7 +116,6 @@ uint8_t MPU6050_GetAccelAngleZ(float *ang_z, uint16_t _time_out); /* Function fo
 			    #define _CONNECTED_I2C hi2c        : I2C structure to use in functions.
 			  
 			    #define _MEM_DEF_VAL_BUFF_LENGTH x : Buffer length for erase memory.
-												    Increase length == Increase speed.
 			  
 	  Example :
 			    #define STM32H7
