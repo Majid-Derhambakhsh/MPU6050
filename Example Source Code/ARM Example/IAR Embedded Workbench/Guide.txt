@@ -1,0 +1,9 @@
+~ Author   : Majid Derhambakhsh
+~ Created  : 09/03/2020
+~ Support  : Majid.Derhambakhsh@outlook.com
+~ Github ID: Majid-Derhambakhsh
+
+- MCU                  : STM32F103C8T
+- Compiler             : IAR Embedded Workbench.
+- Library              : HAL Library.
+- Programming language : C/C++
