@@ -1,6 +1,3 @@
-# MPU6050
-"Easy To Use" MPU6050 library for using in AVR - ARM Cortex M
-
 ![Banner](Banner.png)
 
 # MPU6050
