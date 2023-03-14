@@ -3,7 +3,7 @@
 # MPU6050
 "Easy To Use" MPU6050 library for using in AVR - ARM Cortex M
 
-### Version : 1.0.0
+### Version : 2.0.0
 
 - #### Type : Embedded Software.
 
@@ -15,61 +15,48 @@
 
 ### Initialization and de-initialization functions:
 ```c++
-uint8_t MPU6050_Init(uint16_t _time_out); /* Function for initialize MPU6050 */
-uint8_t MPU6050_AutoInit(uint16_t _time_out); /* Function for initialize MPU6050 */
-uint8_t MPU6050_DefInit(uint16_t _time_out); /* Function for initialize MPU6050 */
-
-uint8_t MPU6050_Reset(uint16_t _time_out); /* Function for reset MPU6050 */
+MPU_StatusTypeDef MPU6050_Init(MPU_TypeDef *MPUx, uint16_t Timeout);
+MPU_StatusTypeDef MPU6050_AutoInit(MPU_TypeDef *MPUx, uint16_t Timeout);
+MPU_StatusTypeDef MPU6050_DefInit(MPU_TypeDef *MPUx, uint16_t Timeout);
 ```  
 
 ### Operation functions:
 ```c++  
-uint8_t MPU6050_IsReady(uint16_t _time_out); /* Function for check connection */
+/* ............................ Check .......................... */
+MPU_StatusTypeDef MPU6050_IsReady(MPU_TypeDef *MPUx, uint8_t Trials, uint16_t Timeout);
+MPU_StatusTypeDef MPU6050_Reset(MPU_TypeDef *MPUx, uint16_t Timeout);
 
-uint8_t MPU6050_SetDeviceID(uint8_t _id, uint16_t _time_out); /* Function for set MPU6050 id */
-uint8_t MPU6050_GetDeviceID(uint8_t *_id, uint16_t _time_out); /* Function for get MPU6050 id */
+/* ....................... Configuration ....................... */
+MPU_StatusTypeDef MPU6050_SetDeviceID(MPU_TypeDef *MPUx, uint8_t ID, uint16_t Timeout);
+MPU_StatusTypeDef MPU6050_GetDeviceID(MPU_TypeDef *MPUx, uint8_t *ID, uint16_t Timeout);
 
 /* ....................... Get Raw Value ....................... */
-/* ------------- Accel ------------ */
-uint8_t MPU6050_GetRawAccelX(int16_t *raw_accelx_value, uint16_t _time_out); /* Function for take Accelerometer (x) value */
-uint8_t MPU6050_GetRawAccelY(int16_t *raw_accely_value, uint16_t _time_out); /* Function for take Accelerometer (y) value */
-uint8_t MPU6050_GetRawAccelZ(int16_t *raw_accelz_value, uint16_t _time_out); /* Function for take Accelerometer (z) value */
-uint8_t MPU6050_GetRawAccel( int16_t *raw_accel_str, uint16_t _time_out); /* Function for take Accelerometer value */
+MPU_StatusTypeDef MPU6050_GetRawAccel(MPU_TypeDef *MPUx, MPU_RawTypeDef *AccelRaw, uint16_t Timeout);
 
-/* ------------- Temp ------------- */
-uint8_t MPU6050_GetRawTemp(int16_t *raw_temp_value, uint16_t _time_out); /* Function for take Temperature value */
+MPU_StatusTypeDef MPU6050_GetRawGyro(MPU_TypeDef *MPUx, MPU_RawTypeDef *GyroRaw, uint16_t Timeout);
 
-/* ------------- Gyro ------------- */
-uint8_t MPU6050_GetRawGyroX(int16_t *raw_gyrox_value, uint16_t _time_out); /* Function for take Gyroscope (x) value */
-uint8_t MPU6050_GetRawGyroY(int16_t *raw_gyroy_value, uint16_t _time_out); /* Function for take Gyroscope (y) value */
-uint8_t MPU6050_GetRawGyroZ(int16_t *raw_gyroz_value, uint16_t _time_out); /* Function for take Gyroscope (z) value */
-uint8_t MPU6050_GetRawGyro( int16_t *raw_gyro_str, uint16_t _time_out); /* Function for take Gyroscope value */
+MPU_StatusTypeDef MPU6050_GetRawTemp(MPU_TypeDef *MPUx, int16_t *Temp, uint16_t Timeout);
 
 /* ......................... Get Value ......................... */
-/* ------------- Accel ------------ */
-uint8_t MPU6050_GetAccelX(float *accelx_value, uint16_t _time_out); /* Function for take Accelerometer (x) value */
-uint8_t MPU6050_GetAccelY(float *accely_value, uint16_t _time_out); /* Function for take Accelerometer (y) value */
-uint8_t MPU6050_GetAccelZ(float *accelz_value, uint16_t _time_out); /* Function for take Accelerometer (z) value */
-uint8_t MPU6050_GetAccel( float *accel_str, uint16_t _time_out); /* Function for take Accelerometer value */
+MPU_StatusTypeDef MPU6050_GetAccel(MPU_TypeDef *MPUx, MPU_XYZTypeDef *Accel, uint16_t Timeout);
 
-/* ------------- Temp ------------- */
-uint8_t MPU6050_GetTemp(float *temp_value, uint16_t _time_out); /* Function for take Temperature value */
+MPU_StatusTypeDef MPU6050_GetGyro(MPU_TypeDef *MPUx, MPU_XYZTypeDef *Gyro, uint16_t Timeout);
 
-/* ------------- Gyro ------------- */
-uint8_t MPU6050_GetGyroX(float *gyrox_value, uint16_t _time_out); /* Function for take Gyroscope (x) value */
-uint8_t MPU6050_GetGyroY(float *gyroy_value, uint16_t _time_out); /* Function for take Gyroscope (y) value */
-uint8_t MPU6050_GetGyroZ(float *gyroz_value, uint16_t _time_out); /* Function for take Gyroscope (z) value */
-uint8_t MPU6050_GetGyro( float *gyro_str, uint16_t _time_out); /* Function for take Gyroscope value */
+MPU_StatusTypeDef MPU6050_GetTemp(MPU_TypeDef *MPUx, float *Temp, uint16_t Timeout);
 
 /* ................. Angle with accelerometer .................. */
-uint8_t MPU6050_GetAccelAngleX(float *ang_x, uint16_t _time_out); /* Function for take x angle */
-uint8_t MPU6050_GetAccelAngleY(float *ang_y, uint16_t _time_out); /* Function for take y angle */
-uint8_t MPU6050_GetAccelAngleZ(float *ang_z, uint16_t _time_out); /* Function for take z angle */
+MPU_StatusTypeDef MPU6050_GetRoll(MPU_TypeDef *MPUx, float *Roll, uint16_t Timeout);
+
+MPU_StatusTypeDef MPU6050_GetPitch(MPU_TypeDef *MPUx, float *Pitch, uint16_t Timeout);
+
+MPU_StatusTypeDef MPU6050_GetYaw(MPU_TypeDef *MPUx, float *Yaw, uint16_t Timeout);
+
+MPU_StatusTypeDef MPU6050_GetRPY(MPU_TypeDef *MPUx, MPU_RPYTypeDef *RPY, uint16_t Timeout);
 
 ``` 
 ### Macros:
 ```c++  
-#define _MPU_AD0_LEVEL  
+- None 
 ``` 
 
 ## How to use this library
@@ -95,51 +82,19 @@ uint8_t MPU6050_GetAccelAngleZ(float *ang_z, uint16_t _time_out); /* Function fo
 
   /* ------------------------------------------------ */
   ``` 
-##### STM32 Example:  
-  ```c++  
-  /* ------- Required Headers ------ */
-  //#include ".h" /* required headers */
-
-  /* -------- Configuration -------- */
-  #define STM32F1
-
-  #define _CONNECTED_I2C hi2c1
-
-  #define _MEM_DEF_VAL_BUFF_LENGTH 50
-
-  /*
-	  Guide   :
-			    #define STM32Xx                    : STM32 Family.
-			    #define _CONNECTED_I2C hi2c        : I2C structure to use in functions.
-			  
-			    #define _MEM_DEF_VAL_BUFF_LENGTH x : Buffer length for erase memory.
-			  
-	  Example :
-			    #define STM32H7
-			  
-			    #define _CONNECTED_I2C hi2c1
-			  
-			    #define _MEM_DEF_VAL_BUFF_LENGTH 100
-  */
-
-  ``` 
   
 #### 3.  Config Chipset in 'mpu6050_conf.h' header, for example:  
    * Options:  
    
       ```c++
       /* ~~~~~~~~~~~~~~ Required Headers ~~~~~~~~~~~~~ */
-      #include "MATH_EX/math_ex.h" /* Import math lib */
+      #include "MATH_EX/math_ex.h" // Don't remove this line
 
       /* Driver-library for AVR */
-      //#include "GPIO/gpio_unit.h" /* Import gpio lib */
-      //#include "I2C_UNIT/i2c_unit.h" /* Import i2c lib */
+      //#include "I2C_UNIT/i2c_unit.h"
 
       /* Driver-library for STM32 */
-      #include "STM32_I2C/stm32_i2c.h" /* Import i2c lib */
-
-      /* ~~~~~~~~~~~~~~~~ MPU Address ~~~~~~~~~~~~~~~~ */
-      #define _MPU_AD0_LEVEL _MPU_AD0_LOW /* Set AD0 status */
+      #include "STM32_I2C/stm32_i2c.h"
 
       /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
       
@@ -148,121 +103,61 @@ uint8_t MPU6050_GetAccelAngleZ(float *ang_z, uint16_t _time_out); /* Function fo
           
 #### 4.  Using initialize methods for initialize hardware and chipset, for example:  
 ```c++  
-MPU6050_AutoInit(100);
+MPU_TypeDef IMU1;
+
+IMU1.I2Cx = &hi2c1; // For STM32
+IMU1.Address = MPU_ADD_LOW;
+
+MPU6050_AutoInit(&IMU1, 100);
 ```  
 #### 5.  Using operation methods, for example:  
 #### Example 1:  
 ```c++  
 int main(void)
 {
-    /* ---------------------------------------- */
-	  uint8_t com_resp = 0;
+	I2C_Init();
 	
-	  char str[_STR_LENGHT_FOR_LCD]; /* string for convert */
+	/* ---------- MPU6050 Setup --------- */
+	MPU_TypeDef    IMU1;
+	MPU_XYZTypeDef AccData;
+	MPU_XYZTypeDef GyroData;
 	
-	  float x;
-	  float y;
-	  float z;
-	  float temp;
+	IMU1.I2Cx                       = &hi2c1;
+	IMU1.Address                    = MPU_ADD_LOW;
+	IMU1.SampleRateDivider          = MPU_CLOCK_DIVIDER_8;
+	IMU1.DigitalLowPassFilter       = MPU_DLPF_CFG_5_HZ;
+	IMU1.InterruptEnable            = MPU_INT_DATA_RDY_EN;
+	IMU1.ExtSync                    = MPU_ES_INPUT_DISABLE;
+	IMU1.InterruptConfig.IntOpen    = MPU_INT_OPEN_PUSH_PULL;
+	IMU1.InterruptConfig.IntLevel   = MPU_INT_LEVEL_ACTIVE_HIGH;
+	IMU1.InterruptConfig.LatchIntEn = MPU_LATCH_INT_EN_50US_PULSE;
+	IMU1.GyroFullScaleRange         = MPU_GYRO_FULL_SCALE_RANGE_2000;
+	IMU1.AccelFullScaleRange        = MPU_ACCEL_FULL_SCALE_RANGE_16G;
+	IMU1.ClockSelection             = MPU_CLKSEL_X_AXIS_GYROSCOPE_REFERENCE; 
 	
-	  /* ---------------------------------------- */
-	  MPU6050_AutoInit(); /* Initialize hardware */
+	MPU6050_Init(&IMU1, 100);
 	
-	  /* ---------------------------------------- */
+	/* Device Check */
+	if (MPU6050_IsReady(&IMU1, 10, 100) == MPU_OK)
+	{
+		HAL_UART_Transmit(&huart6, (uint8_t *)"Is Ready\r\n", strlen("Is Ready\r\n"), 100);
+	}
+	else
+	{
+		HAL_UART_Transmit(&huart6, (uint8_t *)"Not Ready\r\n", strlen("Not Ready\r\n"), 100);
+	}
 	
-	  Lcd_GotoXY(_LCD_COLUMN_5,0); /* Goto xy location in LCD */
-	  Lcd_PutString("Hello"); /* Show Hello on LCD */
-	  _Delay_Ms(_WAIT_FOR_NEXT_SHOW); /* Wait */
-	  Lcd_Clear(); /* Clear LCD */
+	while (1) 
+	{
+		/* :::::::::: Read Sensor Data :::::::::: */
+		MPU6050_GetAccel(&IMU1, &AccData, 100);
+		MPU6050_GetGyro(&IMU1, &GyroData, 100);
+		HAL_Delay(100);
 	
-	  while (1) 
-      {
-		
-		    com_resp  = MPU6050_GetAccelAngleX(&x, 100);
-		    com_resp += MPU6050_GetAccelAngleY(&y, 100);
-		    com_resp += MPU6050_GetAccelAngleZ(&z, 100);
-		    com_resp += MPU6050_GetTemp(&temp, 100);
-		
-		    if (com_resp == (_MPU_OK * 4))
-		    {
-			
-			      sprintf(str ,"%0.0f %0.0f %0.0f %0.2f" , x, y, z, temp); /* Convert value */
-			      Lcd_Clear(); /* Clear LCD */
-			      Lcd_GotoXY(0,0); /* Goto xy location in LCD */
-			      Lcd_PutString(str); /* Show value on LCD */
-			      Lcd_GotoXY(0,1); /* Goto xy location in LCD */
-			      Lcd_PutString(" X   Y   Z   TMP"); /* Show value on LCD */
-			
-		    }
-		    else
-		    {
-			
-			      Lcd_Clear(); /* Clear LCD */
-			      Lcd_GotoXY(0,0); /* Goto xy location in LCD */
-			      Lcd_PutString("Error reading!"); /* Show value on LCD */
-			
-		    }
-		
-		    _DELAY_MS(500);
-		
-      }
-}
-   
-``` 
-#### Example 2:  
-```c++  
-int main(void)
-{
-    /* ---------------------------------------- */
-	  uint8_t strLen = 0;
-	  uint8_t com_resp = 0;
-
-	  char str[50]; /* string for convert */
-
-	  float x;
-	  float y;
-	  float z;
+		sprintf(msg ,"AX:%f,AY:%f,AZ:%f,GX:%f,GY:%f,GZ:%f\r\n", AccData.X, AccData.Y, AccData.Z, GyroData.X, GyroData.Y, GyroData.Z);
+		HAL_UART_Transmit(&huart6, (uint8_t *)msg, strlen(msg), 100);
 	
-	  /* ---------------------------------------- */
-	  MPU6050_AutoInit(); /* Initialize hardware */
-	
-	  /* ---------------------------------------- */
-	
-	  Lcd_GotoXY(_LCD_COLUMN_5,0); /* Goto xy location in LCD */
-	  Lcd_PutString("Hello"); /* Show Hello on LCD */
-	  _Delay_Ms(_WAIT_FOR_NEXT_SHOW); /* Wait */
-	  Lcd_Clear(); /* Clear LCD */
-	
-	  while (1) 
-      {
-		
-	      com_resp  = MPU6050_GetAccelAngleX(&x, 100);
-	      com_resp += MPU6050_GetAccelAngleY(&y, 100);
-	      com_resp += MPU6050_GetAccelAngleZ(&z, 100);
-
-	      if (com_resp == (_MPU_OK * 3))
-	      {
-
-		      sprintf(str ,"X:%0.2f Y:%0.2f Z:%0.2f\n" , x,y,z); /* Convert value */
-
-		      strLen = 0;
-		      while(str[strLen] != '\0')
-		      {
-			      strLen++;
-		      }
-
-		      HAL_UART_Transmit(&huart1, (uint8_t *)str, strLen, 100);
-	      }
-	      else
-	      {
-
-		      HAL_UART_Transmit(&huart1, (uint8_t *)"Error reading!\n", 15, 100);
-
-	      }
-
-	      _DELAY_MS(100);
-		
-      }
+	}
 }
    
 ``` 
