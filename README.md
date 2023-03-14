@@ -63,7 +63,7 @@ MPU_StatusTypeDef MPU6050_GetRPY(MPU_TypeDef *MPUx, MPU_RPYTypeDef *RPY, uint16_
 
 ### The MPU6050 library can be used as follows:
 #### 1.  Add .h and source file in project.      
-#### 2.  Config i2c in 'stm32_i2c_conf.h' for STM32 or 'i2c_unit_conf.h' for AVR header, for example:  
+#### 2.  Config I2C in 'i2c_unit_conf.h' for AVR, for example:  
 ##### AVR Example:  
   ```c++  
   /* -------------------- Define -------------------- */
